@@ -1,6 +1,5 @@
-# shadowsocks install
 Xshell6 远程登录 vps (OS:CentOS8)
-## 查看系统是否安装了pip，使用pip安装ss
+## 检测pip
 whereis pip
 pip: /usr/bin/pip3.6
 #这个版本支持 chacha20-ietf-poly1305加密方式
@@ -40,11 +39,11 @@ vim /etc/shadowsocks.conf
     "timeout":60,
     "method":"chacha20-ietf-poly1305"
 }
+
+```
 server_port:服务器监听端口
 password:要和客户端ss密码一致
 method:加密方式和客户端一致
-
-```
 
 ### 开启端口号
  firewall-cmd --zone=public --permanent --add-port=10443/tcp
@@ -225,11 +224,11 @@ WScript.quit
     "sockbuf": 4194304,
     "keepalive": 10
 }
+
+```
 localaddr为 :12948,本地监听端口，供ss访问
 key为password,需和服务端保持一致
 remoteaddr为vps的ip地址以及vps上kcptun监听的端口
-
-```
 ### 客户端ss配置
 服务器 IP 填写本机：127.0.0.1
 服务器端口填写：12948
