@@ -1,33 +1,35 @@
 Xshell6 远程登录 vps (OS:CentOS8)
 ## 检测pip
 whereis pip <br>
-pip: /usr/bin/pip3.6
+pip: /usr/bin/pip3.6<br>
 这个版本支持 chacha20-ietf-poly1305加密方式
 pip3.6 install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
 
 ## [安装 libsodium 包](https://www.24kplus.com/linux/287.html)
 现在ss服务端还启动不了，需要安装libsodium
 
-cd /home
-wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz
-tar -zxf libsodium-1.0.18-stable.tar.gz
+cd /home<br>
+wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz<br>
+tar -zxf libsodium-1.0.18-stable.tar.gz<br>
 cd libsodium-stable
 
 解决错误一： configure: error: no acceptable C compiler found in $PATH 
+
 yum install gcc
 
 解决错误二： config.status: error: Something went wrong bootstrapping makefile fragments for automatic dependency tracking. 
+
 yum install make -y
 
 编译安装
-./configure --prefix=/usr
-make && make check
-sudo make install
-sudo ldconfig
+./configure --prefix=/usr<br>
+make && make check<br>
+sudo make install<br>
+sudo ldconfig<br>
 
 ## 配置ss服务端
-whereis ssserver
-ssserver: /usr/local/bin/ssserver
+whereis ssserver<br>
+ssserver: /usr/local/bin/ssserver<br>
 ### 创建shadowsocks启动配置文件
 vim /etc/shadowsocks.conf
 ```json
@@ -49,8 +51,9 @@ method:加密方式和客户端一致
 
 ### 开启端口号
 ```shell
-firewall-cmd --zone=public --permanent --add-port=10443/tcp
+firewall-cmd --zone=public --permanent --add-port=10443/tcp 
 firewall-cmd --reload
+
 #查看开启的端口号
 firewall-cmd --zone=public --permanent --list-ports
 ```
@@ -65,26 +68,30 @@ ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks.conf Restart=always
 [Install]
 WantedBy=graphical.target
 ```
-开启服务
+开启服务<br>
 systemctl enable shadowsocks
-启动服务
+
+启动服务<br>
 systemctl start shadowsocks
-检查 shadowsocks 服务是否已成功启动
+
+检查 shadowsocks 服务是否已成功启动<br>
 systemctl status shadowsocks -l
 ## [CentOS8 开启 BBR](https://nodeedge.com/centos8-bbr.html)
 开启bbr
+```shell
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
 验证bbr
 sysctl -n net.ipv4.tcp_congestion_control
 lsmod | grep bbr
+```
 ## [安装net-speeder](https://github.com/snooda/net-speeder)
-wget https://github.com/snooda/net-speeder/archive/master.zip
+wget https://github.com/snooda/net-speeder/archive/master.zip<br>
 unzip master.zip
 
-安装epel 包
-wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+安装epel 包<br>
+wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm<br>
 rpm -ivh epel-release-6-8.noarch.rpm
 
 yum install libnet libpcap libnet-devel libpcap-devel
@@ -93,6 +100,7 @@ libpcap-devel现有的yum源匹配不到，到 [centos.pkgs.org](https://centos.
 直接执行 `dnf --enablerepo=PowerTools install libpcap-devel` 即可安装
 
 编译前还要安装一个包
+```shell
 yum install libnet-devel
 编译
 cd net-speeder-master/
@@ -101,8 +109,10 @@ sh build.sh
 ip address
 关闭tso
 ethtool -K ens3 tso off
-开启单边加速(前台运行)
+```
+开启单边加速(前台运行)<br>
 ./net_speeder ens3 "ip"
+
 开启单边加速(后台运行)
 vim /etc/systemd/system/netspeeder.service
 ```json
@@ -117,19 +127,20 @@ ExecStart=/home/net-speeder-master/net_speeder ens3  "ip"
 WantedBy=multi-user.target
 
 ```
-systemctl enable netspeeder
-启动服务
-systemctl start netspeeder
+systemctl enable netspeeder<br>
+启动服务<br>
+systemctl start netspeeder<br>
 systemctl status netspeeder
 
 ## [vps上安装kcptun](https://blog.kuoruan.com/102.html)
 服务端和客户端用同一个版本
 在GitHub releas上找到kcptun包，使用wget命令下载到vps上
+```shell
 cd /home
 mkdir kcptun
 cd kcptun 
 wget https://github.com/xtaci/kcptun/releases/download/v20200103/kcptun-linux-amd64-20200103.tar.gz
-
+```
 解压
 tar -zxf kcptun-linux-amd64-20200103.tar.gz
 
@@ -168,9 +179,9 @@ ExecStart=/home/kcptun/server_linux_amd64 -c  /home/kcptun/kcptun.conf
 WantedBy=multi-user.target
 
 ```
-systemctl enable kcptun
-启动服务
-systemctl start kcptun
+systemctl enable kcptun<br>
+启动服务<br>
+systemctl start kcptun<br>
 systemctl status kcptun
 
 ## 客户端(windows7)安装kcptun
@@ -230,11 +241,11 @@ WScript.quit
 }
 
 ```
-localaddr为 :12948,本地监听端口，供ss访问
-key为password,需和服务端保持一致
-remoteaddr为vps的ip地址以及vps上kcptun监听的端口
+localaddr为 :12948,本地监听端口，供ss访问<br>
+key为password,需和服务端保持一致<br>
+remoteaddr为vps的ip地址以及vps上kcptun监听的端口<br>
 ### 客户端ss配置
-服务器 IP 填写本机：127.0.0.1
+服务器 IP 填写本机：127.0.0.1<br>
 服务器端口填写：12948
 
 
