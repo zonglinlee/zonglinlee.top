@@ -3,15 +3,22 @@ Xshell6 远程登录 vps (OS:CentOS8)
 whereis pip <br>
 pip: /usr/bin/pip3.6<br>
 这个版本支持 chacha20-ietf-poly1305加密方式
-pip3.6 install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
+
+`pip3.6 install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U`
 
 ## [安装 libsodium 包](https://www.24kplus.com/linux/287.html)
 现在ss服务端还启动不了，需要安装libsodium
-
+```shell
 cd /home<br>
-wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz<br>
-tar -zxf libsodium-1.0.18-stable.tar.gz<br>
+wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz
+tar -zxf libsodium-1.0.18-stable.tar.gz
 cd libsodium-stable
+@编译安装
+./configure --prefix=/usr
+make && make check
+sudo make install
+sudo ldconfig
+```
 
 解决错误一： configure: error: no acceptable C compiler found in $PATH 
 
@@ -21,11 +28,6 @@ yum install gcc
 
 yum install make -y
 
-编译安装
-./configure --prefix=/usr<br>
-make && make check<br>
-sudo make install<br>
-sudo ldconfig<br>
 
 ## 配置ss服务端
 whereis ssserver<br>
