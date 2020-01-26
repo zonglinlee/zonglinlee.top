@@ -1,6 +1,6 @@
 Xshell6 远程登录 vps (OS:CentOS8)
 ## 检测pip
-whereis pip
+whereis pip <br>
 pip: /usr/bin/pip3.6
 这个版本支持 chacha20-ietf-poly1305加密方式
 pip3.6 install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
