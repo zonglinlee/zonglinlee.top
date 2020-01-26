@@ -13,7 +13,7 @@ cd /home<br>
 wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz
 tar -zxf libsodium-1.0.18-stable.tar.gz
 cd libsodium-stable
-@编译安装
+#编译安装
 ./configure --prefix=/usr
 make && make check
 sudo make install
@@ -142,9 +142,9 @@ cd /home
 mkdir kcptun
 cd kcptun 
 wget https://github.com/xtaci/kcptun/releases/download/v20200103/kcptun-linux-amd64-20200103.tar.gz
-```
-解压
+# 解压
 tar -zxf kcptun-linux-amd64-20200103.tar.gz
+```
 
 创建启动配置文件
 vim kcptun.conf
@@ -159,13 +159,14 @@ vim kcptun.conf
     "datashard": 70,
     "parityshard": 30
 }
+```
 上面的配置一定要和客户端的一致，key是密码，listen是客户端访问服务端时候监听的端口
 target是要加速的vps上的服务，它通信的是vps上的ss，所以ip为127.0.0.1，端口号就是ss服务监听的的端口号
 服务端kcptun 和 ss 各自提供自己的服务，各自监听自己的端口 ，kcptun 提供 ss端口的加速服务
 ### 开启端口号(这个用udp协议)
- firewall-cmd --zone=public --permanent --add-port=29900/udp
+ firewall-cmd --zone=public --permanent --add-port=29900/udp <br>
  firewall-cmd --reload
-```
+ 
 创建服务脚本
 vim /etc/systemd/system/kcptun.service
 ```json
