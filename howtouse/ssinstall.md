@@ -2,7 +2,7 @@ Xshell6 远程登录 vps (OS:CentOS8)
 ## 检测pip
 whereis pip
 pip: /usr/bin/pip3.6
-#这个版本支持 chacha20-ietf-poly1305加密方式
+这个版本支持 chacha20-ietf-poly1305加密方式
 pip3.6 install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
 
 ## [安装 libsodium 包](https://www.24kplus.com/linux/287.html)
@@ -42,14 +42,18 @@ vim /etc/shadowsocks.conf
 
 ```
 server_port:服务器监听端口
+
 password:要和客户端ss密码一致
+
 method:加密方式和客户端一致
 
 ### 开启端口号
- firewall-cmd --zone=public --permanent --add-port=10443/tcp
- firewall-cmd --reload
- 查看开启的端口号
- firewall-cmd --zone=public --permanent --list-ports
+```shell
+firewall-cmd --zone=public --permanent --add-port=10443/tcp
+firewall-cmd --reload
+#查看开启的端口号
+firewall-cmd --zone=public --permanent --list-ports
+```
 
 ### 将ss添加到Systemd 服务管理中
 vim /etc/systemd/system/shadowsocks.service
