@@ -1,4 +1,3 @@
-# shadowsocks install
 Xshell6 远程登录 vps (OS:CentOS8)
 ## 检测pip
 whereis pip
