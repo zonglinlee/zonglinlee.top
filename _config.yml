@@ -6,8 +6,9 @@
 title: 风滚草
 subtitle: '风滚草的个人博客'
 description: ''
-keywords: '前端,javascript,node,vue,webpack'
 author: lee
+keywords: 
+# keywords: '前端,javascript,node,vue,webpack'
 language: en
 timezone: 'Asia/Shanghai'
 
