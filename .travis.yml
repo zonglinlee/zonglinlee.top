@@ -9,6 +9,9 @@ branches:
 script:
   - hexo generate # generate static files
 deploy:
+  type: git
+  repo: https://github.com/zonglinlee/zonglinlee
+  branch: gh-pages
   provider: pages
   skip-cleanup: true
   github-token: $GH_TOKEN

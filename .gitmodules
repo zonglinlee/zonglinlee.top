@@ -1,6 +1,3 @@
-[submodule "hexo-theme-cactus"]
-	path = hexo-theme-cactus
-	url = https://github.com/zonglinlee/hexo-theme-cactus.git
 [submodule "themes/cactus"]
 	path = themes/cactus
 	url = https://github.com/zonglinlee/hexo-theme-cactus.git
