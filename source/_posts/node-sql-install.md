@@ -1,3 +1,11 @@
+---
+comments: true
+tags: 
+- 部署
+- CentOS
+categories:
+- [CentOS8,Install]
+---
 # CentOS8 install node 
 ## 安装node
 ```shell
