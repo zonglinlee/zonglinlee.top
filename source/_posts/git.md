@@ -4,6 +4,7 @@ tag:
 - git
 ---
 ## [submodule](https://blog.phpgao.com/git_submodule.html)
+submodule中文件变更了,在主工作目录中是没有办法add并commit的，分而治之，主模块提交主模块的，子模块提交自己的，子模块提交后，主模块会感知到，从而再在主模块中提交即可
 ###  添加 `submodule`
 将GitHub上这个模块添加到本地git仓库的 usr/plugins/ExternalTool 中作为一个submodule
 `git submodule add https://github.com/phpgao/ExternalTool.git   usr/plugins/BaiduSubmit`
