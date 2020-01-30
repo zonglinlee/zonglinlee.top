@@ -6,7 +6,7 @@
 # Site
 title: 风滚草
 subtitle: 风滚草的个人博客
-description: ''
+description: '风滚草的个人博客'
 author: lee
 keywords: 
 language: zh-CN
@@ -14,7 +14,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://tumbleweed.top
 root: /
 permalink: :title/
 permalink_defaults:
@@ -59,7 +59,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 3
   order_by: -date
 
 # Category & Tag
@@ -101,4 +101,4 @@ theme: cactus
 deploy:
   type: ''
 # Comments
-livere_uid: 'MTAyMC80ODQxNS8yNDkwOQ=='
+# livere_uid: 'MTAyMC80ODQxNS8yNDkwOQ=='

@@ -4,6 +4,8 @@ tags:
 - ss
 categories:
 - [CentOS8,Install]
+date: 2013-07-14 17:01:34
+title: 'How to install ss'
 ---
 Xshell6 远程登录 vps (OS:CentOS8)
 ## 检测pip
@@ -16,7 +18,7 @@ pip: /usr/bin/pip3.6<br>
 ## [安装 libsodium 包](https://www.24kplus.com/linux/287.html)
 现在ss服务端还启动不了，需要安装libsodium
 ```shell
-cd /home<br>
+cd /home
 wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz
 tar -zxf libsodium-1.0.18-stable.tar.gz
 cd libsodium-stable
@@ -25,6 +27,7 @@ cd libsodium-stable
 make && make check
 sudo make install
 sudo ldconfig
+
 ```
 
 解决错误一： configure: error: no acceptable C compiler found in $PATH 
