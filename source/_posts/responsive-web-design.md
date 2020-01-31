@@ -54,3 +54,13 @@ syntax:@media media-type and (media-features){ ... }
 
 - UI设计先从移动端开始，小屏幕到大屏幕考虑。小屏幕都是竖着从上往下排列，等到屏幕宽度变大之后来一个 media query(min-width) 即可，这样可以少些好多代码
 - 如果页面最先展现 图片 ，小标题来展现一些 info 信息，html 结构也应该先写标题，段落(用于展现info)，保证在没有css加载的时候逻辑顺序正确，通过css flex-box 中的order调整视觉上的布局。
+
+- 图片处理技巧
+如果想调整图片大小
+img{
+    width:100%
+    min-height:200px;
+    object-fit: cover;
+    //这个会按比例放大图片，并进行裁切以适应容器
+    object-position:left/right //调整图片显示位置
+}
