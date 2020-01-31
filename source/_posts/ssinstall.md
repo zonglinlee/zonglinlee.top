@@ -6,8 +6,11 @@ categories:
 - [CentOS8,Install]
 date: 2013-07-14 17:01:34
 title: 'How to install ss'
+banner: /ssinstall/shasowsocks.png
 ---
+{% asset_img shadowsocks.png "shadowsocks.png" %}
 Xshell6 远程登录 vps (OS:CentOS8)
+<!-- more -->
 ## 检测pip
 whereis pip <br>
 pip: /usr/bin/pip3.6<br>
