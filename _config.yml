@@ -1,16 +1,16 @@
 # Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
-## keywords: 前端,javascript,node,vue,webpack
 
 # Site
 title: 风滚草
-subtitle: 风滚草的个人博客
-description: '风滚草的个人博客'
-author: lee
-keywords: 
-language: zh-CN
-timezone: Asia/Shanghai
+subtitle: 'tumbleweed.top'
+description: 'Hello world!'
+keywords:
+author: zonglinlee
+author_detail: A frontend Web developer, I am looking for a job.
+language: en
+timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -20,7 +20,7 @@ permalink: :title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: false # Set to false to remove trailing '.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -42,16 +42,23 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
+#自带高亮配置
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
+#高亮插件
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'tomorrow'
+  line_number: false    # default false
+  custom_css:
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -94,11 +101,27 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cactus
+theme: matery
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: ''
-# Comments
-# livere_uid: 'MTAyMC80ODQxNS8yNDkwOQ=='
+# hexo-generator-search 配置  
+search:
+  path: search.xml
+  field: post
+# hexo-permalink-pinyin  
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+#rss  # hexo-generator-feed
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date

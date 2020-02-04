@@ -14,3 +14,5 @@ a:hover,a:focus{
     //这两个最好一块写
     color:pink;
 }
+
+- 如果父元素display:flex,子元素display：none; position:absolute都不算在flex-items里面
