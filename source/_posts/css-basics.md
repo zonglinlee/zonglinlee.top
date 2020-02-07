@@ -16,3 +16,13 @@ a:hover,a:focus{
 }
 
 - 如果父元素display:flex,子元素display：none; position:absolute都不算在flex-items里面
+
+The unset CSS keyword resets a property to its inherited value if it inherits from its parent, and to its initial value if not.
+
+The initial CSS keyword applies the initial (or default) value of a property to an element. This initial value is set by the browser. 
+
+The inherit CSS keyword causes the element for which it is specified to take the computed value of the property from its parent element.
+
+display:none
+Turns off the display of an element so that it has no effect on layout (the document is rendered as though the element did not exist). All descendant elements also have their display turned off.
+To have an element take up the space that it would normally take, but without actually rendering anything, use the visibility property instead.
