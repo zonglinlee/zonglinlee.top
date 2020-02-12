@@ -153,3 +153,40 @@ If more than 12 columns are placed within a single row, each group of extra colu
     <div class="w-100"></div>
 ```
 ### Reordering
+Use `.order-` classes for controlling the visual order of your content(`.order-1.order-md-2`), Includes support for 1 through 12 across all five grid tiers.
+There are also responsive `.order-first` and `.order-last` classes that change the order of an element by applying order: -1 and order: 13 (order: $columns + 1), respectively.
+### Offsetting columns
+Move columns to the right using `.offset-md-*` classes.`.offset-md-4` moves `.col-md-4 `over four columns.
+### Margin utilities
+With the move to flexbox in v4, you can use margin utilities like `.mr-auto` to force sibling columns away from one another.
+### Customizing the grid
+Using our built-in grid Sass variables and maps, it’s possible to completely customize the predefined grid classes. Change the number of tiers, the media query dimensions, and the container widths—then recompile.
+## [Utilities for layout](https://getbootstrap.com/docs/4.4/layout/utilities-for-layout/)
+Bootstrap includes dozens of utility classes for showing, hiding, aligning, and spacing content.
+- Changing display(Visible only on sm	`.d-none .d-sm-block .d-md-none`)
+- [Margin and padding](https://getbootstrap.com/docs/4.4/utilities/spacing/)
+Spacing utilities that apply to all breakpoints, from xs to xl, have no breakpoint abbreviation in them. 
+- Toggle visibility(.visible or .invisible )
+### Flexbox options
+  不是所有的元素都是display：flex;如果要开启弹性盒子，添加`.d-flex` or one of the responsive variants (`.d-sm-flex`  `.d-inline-flex.`).
+
+`.flex-row .flex-row-reverse` `.flex-column .flex-column-reverse`
+`justify-content-start .justify-content-end .justify-content-center`
+`.justify-content-between.justify-content-around`
+`.align-items-start.align-items-end.align-items-center`
+`.align-items-baseline.align-items-stretch`
+`.align-self-start.align-self-end.align-self-center`
+`.align-self-baseline.align-self-stretch`
+#### Fill
+Use the `.flex-fill` class on a series of sibling elements to force them into widths equal to their content 
+#### 
+`.flex-grow-* ` `.flex-shrink-*` `.flex-{grow|shrink}-0 .flex-{grow|shrink}-1`
+#### Auto margins
+Flexbox can do some pretty awesome things when you mix flex alignments with auto margins. Shown below are three examples of controlling flex items via auto margins: default (no auto margin), pushing two items to the right (`.mr-auto`), and pushing two items to the left (`.ml-auto`).
+#### wrap
+`.flex-nowrap`, wrapping with `.flex-wrap` or reverse wrapping with `.flex-wrap-reverse`.
+#### order
+`.order-0.order-1.order-2.order-3.order-4.order-5.order-6.order-7.order-8.order-9.order-10.order-11.order-12`
+#### Align content
+Use align-content utilities on flexbox containers to align flex items together on the cross axis. Choose from start (browser default), end, center, between, around, or stretch. To demonstrate these utilities, we’ve enforced flex-wrap: wrap and increased the number of flex items.
+`This property has no effect on single rows of flex items.`
