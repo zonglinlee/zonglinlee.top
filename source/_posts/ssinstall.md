@@ -66,7 +66,7 @@ method:加密方式和客户端一致
 
 ### 开启端口号
 ```shell
-firewall-cmd --zone=public --permanent --add-port=10443/tcp 
+firewall-cmd --zone=public --permanent --add-port=10443/tcp &&
 firewall-cmd --reload
 
 #查看开启的端口号

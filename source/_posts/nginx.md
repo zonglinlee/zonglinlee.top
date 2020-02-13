@@ -106,3 +106,68 @@ Default value: index.html
 
 
 HTTP 304 未改变说明无需再次传输请求的内容，也就是说可以使用缓存的内容
+
+
+###  浏览器缓存
+所有以jpg/png/gif结尾的图片文件缓存24h
+location ~ .*\.(jpg|png|gif)$ {
+        expires 24h;   
+}
+### 浏览器缓存
+add_header name value
+location ~ .*\.json$ {
+        add_header Access-Control-Allow-Origin http://localhost:3000;
+        add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE,OPTIONS;
+        root /data/json;
+    }
+
+### 防盗链
+The HTTP referer (a misspelling of referrer),By checking the referrer, the new webpage can see where the request originated.
+In the most common situation this means that when a user clicks a hyperlink in a web browser, the browser sends a request to the server holding the destination webpage. The request may include the referer field, which indicates the last page the user was on (the one where they clicked the link).
+
+location ~ .*\.(jpg|png|gif)$ {
+        expires 1h;
+        valid_referers none blocked 47.104.184.134;
+        if ($invalid_referer) {
+           return 403;
+        }
+        root /data/images;
+    }
+
+- none “Referer” 为空
+- blocked “Referer”不为空，但是里面的值被代理或者防火墙删除了，这些值都不以http://或者https://开头，而是“Referer: XXXXXXX”这种形式
+- server_names “Referer”来源头部包含当前的server_names（当前域名）
+- arbitrary string 任意字符串,定义服务器名或者可选的URI前缀.主机名可以使用*开头或者结尾，在检测来源头部这个过程中，来源域名中的主机端口将会被忽略掉
+- regular expression 正则表达式,~表示排除https://或http://开头的字符串.
+注意:通过Referer实现防盗链比较基础，仅可以简单实现方式资源被盗用。构造Referer的请求很容易实现
+### 代理服务
+正向代理，代理的是客户端，比如浏览器，翻墙上外网。
+反向代理代理的是服务器，浏览器访问代理服务器，比如nginx代理服务器，nginx转发请求给后面的服务器集群处理，平衡负载，同时也保证了业务服务器的安全性，客户端感知不到业务处理服务器，互联网向外暴露的是nginx代理服务器。
+
+### [反向代理](http://www.zhufengpeixun.com/plan/html/43.nginx.html#t518.7.1%20upstream)
+
+在http模块中配置upstream模块，放置服务器集群
+在server模块location中配置 proxy_pass 
+```shell
+http{
+    upstream test {    # 定义一个服务器组名 ，默认用轮询的方式分配
+        server localhost:3000;
+        server localhost:4000;
+        server localhost:5000;
+    }
+
+    server {
+          location / {
+            proxy_pass http://test; #以/开头的路由转交给服务器组test处理
+        }
+    }
+}
+```
+### [阿里云端口问题](https://cnodejs.org/topic/599d58e1f36051a45246c2b5)
+ifconfig看不到外网ip，只显示环回地址和内网ip
+
+答案：阿里云现在不能使用经典网络了，现在连接应该是通过转发一次到内部机房的，所以ECS里面只能看到一个局域网的IP.在ECS实例的安全组配置里面配置外网可访问的端口，这样就能在外面使用公网IP访问了。开启3000、4000、5000端口
+
+
+Accelerated support with caching of FastCGI, uwsgi, Simple Common Gateway
+Interface (SCGI)
