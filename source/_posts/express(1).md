@@ -13,3 +13,7 @@ session机制，客户端第一次访问服务器的时候，服务器会生成�
 session的持久化保存:session-store.  
  connect-mongo A MongoDB-based session store
  connect-redis A Redis-based session store.
+
+如何在vscode中debugger，打断点
+Object.defineProperty
+object.create
