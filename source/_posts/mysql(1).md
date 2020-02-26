@@ -22,7 +22,7 @@ EXIT; //断开mysql客户端和服务器的连接
 ### 参考链接
 https://www.runoob.com/mysql/mysql-tutorial.html
 https://juejin.im/post/5ae55861f265da0ba062ec71
-## [node.js 库 `mysql` 用法](https://github.com/mysqljs/mysq)
+## [node.js 库 `mysql` 用法](https://github.com/mysqljs/mysql)
 ### 连接mysql
 方式一(推荐)：返回一个connection对象
 ```js
