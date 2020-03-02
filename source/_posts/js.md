@@ -22,3 +22,35 @@ var formData = new FormData(someFormElement);//将form元素传入构造函数�
 如果不想使用FormData对象，请参考以下链接
 https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Submitting_forms_and_uploading_files
 
+## ajax cookie
+ajax 配置nginx,跨域请求的时候会不带cookie,如果要带cookie
+request header 要配置 withCredentials：true
+response header 要配置 Access-Control-Allow-Credentials: true
+
+如果用koa框架，会有 `koa-cors`包设置Access-Control-Allow-Credentials.  查看koa-cors源码配置选项{credentials:true}
+## FormData 对象
+```js
+let form = $('form')
+let formdata = new FormData('form')
+console.log(formdata) //打印出{}空对象
+//FormData实例对象打印不出任何东西，但它提供了许多方法，会返回迭代器。
+```
+FormData.entries()
+Returns an iterator allowing to go through all key/value pairs contained in this object.
+## File interface
+The File interface provides information about files and allows JavaScript in a web page to access their content.
+`File` objects are generally retrieved from a `FileList` object returned as a result of a user selecting files using the <input> element, from a drag and drop operation's `DataTransfer` object, or from the `mozGetAsFile() API` on an `HTMLCanvasElement`.
+A File object is a specific kind of a `Blob`, and can be used in any context that a Blob can. In particular, `FileReader`, `URL.createObjectURL()`, `createImageBitmap()`, and `XMLHttpRequest.send()` accept both Blobs and Files.
+file属性
+Properties:File.lastModified/File.lastModifiedDate/File.name/File.size/File.type
+file 方法
+File接口不实现任何方法，都是从Blob接口上继承上来的。
+## Blob
+The Blob object represents a blob, which is a file-like object of immutable, raw data; they can be read as text or binary data, or converted into a `ReadableStream` so its methods can be used for processing the data.
+
+Blobs can represent data that isn't necessarily in a JavaScript-native format. The File interface is based on Blob, inheriting blob functionality and expanding it to support files on the user's system.
+## ArrayBuffer
+The ArrayBuffer object is used to represent a generic, fixed-length raw binary data buffer.
+It is an array of bytes, often referred to in other languages as a "byte array".You cannot directly manipulate the contents of an ArrayBuffer; instead, you create one of the `typed array objects` or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
+
+The ArrayBuffer() constructor creates a new ArrayBuffer of the given length in bytes, you can also get an array buffer from existing data, for example from a `Base64 string` or from a `local file`.
