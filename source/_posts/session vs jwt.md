@@ -5,3 +5,11 @@ jwt 是另外一种会话管理机制
 服务的生成token返回给客户端，客户端保存在localStorage 或者sessionStorage中，在axios中配置全局默认响应头 authorization，传入token
 axios.defaults.headers['Authorization'] = sessionStorage.getItem("token");
 服务端收到之后，从req对象中提取token,再校验token的合法性，token中包含了用户名。
+
+
+
+服务端设置httponly后，客户端不能使用document.cookie获取值
+res.header("Access-Control-Allow-Origin", "具体请求源");  //这里要写具体请求地址
+res.header(" Access-Control-Allow-Credentials", true);      //增加
+vue中：
+axios.defaults.withCredentials = true
