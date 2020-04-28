@@ -9,7 +9,7 @@ description: 'Hello world!'
 keywords:
 author: zonglinlee
 author_detail: A frontend Web developer, I am looking for a job.
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
@@ -101,7 +101,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: matery
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

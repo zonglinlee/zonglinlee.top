@@ -64,3 +64,29 @@ img{
     //这个会按比例放大图片，并进行裁切以适应容器
     object-position:left/right //调整图片显示位置
 }
+
+DPI适配
+//准备3种图片适配3种不同倍率的图片,这种方法可行，但是太麻烦
+//市面上都是切3倍率的图，然后1/2倍屏都可以用，就是影响加载速度。
+@media screen and (device-pixel-ratio:1){
+    .header{
+        background:url(xxx.png)
+    }
+}
+@media screen and (device-pixel-ratio:2){
+    .header{
+        background:url(xxx@2x.png)
+    }
+}
+
+@media screen and (device-pixel-ratio:2){
+    .header{
+        background:url(xxx@3x.png)
+    }
+}
+rem布局要点
+<script>
+    //根据设计稿动态调整根元素字体大小
+    //在750px设计稿下，根元素font-size为100px
+    document.documentElement.style.fontSize = document.documentElement.clientWidth/750 *100 +'px'
+</script>
