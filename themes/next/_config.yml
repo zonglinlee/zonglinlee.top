@@ -152,7 +152,7 @@ sidebar:
   #  - always  expand for all pages automatically.
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  totally remove sidebar including sidebar toggle.
-  display: post
+  display: always
 
   # Sidebar padding in pixels.
   padding: 18
@@ -180,7 +180,6 @@ site_state: true
 social:
   GitHub: https://github.com/zonglinlee || github
   E-Mail: mailto:173389705@qq.com || envelope
-  知乎: http://www.zhihu.com/people/your-user-name
   #Weibo: https://weibo.com/yourname || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -584,7 +583,7 @@ comments:
 # Disqus
 disqus:
   enable: true
-  shortname:
+  shortname: tumbleweed-top
   count: true
   #post_meta_order: 0
 
@@ -678,7 +677,7 @@ google_analytics:
   only_pageview: false
 
 # Baidu Analytics
-baidu_analytics: # <app_id>
+baidu_analytics: 3cf2ba04786ec43f607967d2bcd6a389
 
 # Growingio Analytics
 growingio_analytics: # <project_id>
