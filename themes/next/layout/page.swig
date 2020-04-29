@@ -57,6 +57,12 @@
           <div class="event-list">
           </div>
           {% include '_scripts/pages/schedule.swig' %}
+        {% elif page.type === 'about' %}
+        <img src="/images/avatar.jpg" class="author-image">
+          <div class="author-description">
+            {{page.motto}}
+          </div>
+          {{page.content}}
         {% else %}
           {{ page.content }}
         {%- endif %}
