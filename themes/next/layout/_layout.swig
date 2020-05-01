@@ -51,7 +51,10 @@
   {%- endif %}
   {% include '_third-party/math/index.swig' %}
   {% include '_third-party/quicklink.swig' %}
-
+{# 
+next_inject是一个辅助函数，'bodyEnd',是next主题提前定义好的插入点，
+next_inject内部调用了hexo的内置辅助函数partial 
+#}
   {{- next_inject('bodyEnd') }}
   {%- if theme.pjax %}
     </div>

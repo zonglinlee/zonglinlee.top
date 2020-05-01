@@ -70,6 +70,7 @@ module.exports = hexo => {
     // Add or override view.
     injects[type].raws.forEach((injectObj, index) => {
       let name = `inject/${type}/${injectObj.name}`;
+      //hexo.theme inherits from Box, and also saves templates.
       hexo.theme.setView(name, injectObj.raw);
       configs[name] = {
         layout : name,
@@ -79,6 +80,7 @@ module.exports = hexo => {
       };
     });
     // Views sort.
+    //Object.values讲对象的值保存在数组中返回，这里相当于将configs[name]对象外面包裹了一个数组
     hexo.theme.config.injects[type] = Object.values(configs)
       .sort((x, y) => x.order - y.order);
   });

@@ -60,9 +60,12 @@
         {% elif page.type === 'about' %}
         <img src="/images/avatar.jpg" class="author-image">
           <div class="author-description">
-            {{page.motto}}
+            {{ page.motto }}
           </div>
-          {{page.content}}
+          {# 
+          page.content：The full processed content of the article 
+          #}
+          {{ page.content }}
         {% else %}
           {{ page.content }}
         {%- endif %}

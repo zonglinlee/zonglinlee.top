@@ -4,9 +4,10 @@
 
 const crypto = require('crypto');
 
+// 当执行这个next_inject这个辅助函数的时候，会将定义在 inject-point 的模板文件通过partial方法全部导入进来
 hexo.extend.helper.register('next_inject', function(point) {
   return hexo.theme.config.injects[point]
-    .map(item => this.partial(item.layout, item.locals, item.options))
+    .map(item => {  return this.partial(item.layout, item.locals, item.options)})
     .join('');
 });
 
