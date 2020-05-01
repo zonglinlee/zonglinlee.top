@@ -16,6 +16,7 @@
 
     {%- if post.header !== false %}
       <header class="post-header">
+      {# is_index是在index.swig里面定义的 #}
         <{%- if is_index %}h2{% else %}h1{%- endif %} class="post-title{%- if post.direction and post.direction.toLowerCase() === 'rtl' %} rtl{%- endif %}" itemprop="name headline">
           {# Link posts #}
           {%- if post.link %}

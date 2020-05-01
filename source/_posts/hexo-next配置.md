@@ -10,7 +10,7 @@ tags:
 ## Hexo 配置
 
 ## 如何在页面中关闭评论
-
+<!-- more -->
 在 front-matter 中配置 `comments: false`
 
 ## [如何引入图片](https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/)
@@ -23,7 +23,59 @@ tags:
   当执行`hexo new [layout] title`时会生成 title 文件名的文件夹来存放图片，通过相对路径引入即可
 
 ## next 主题配置
-
+### 模板中的变量
+在模板中打印变量,以下三段代码可以在分别打印出各自的变量
+```html
+//打印page变量
+  <div style="border:solid 2px;">
+    {% for key ,value in page %}
+     {{ key }}---{{ value }}<br>
+     {% endfor %}
+  </div>
+// 打印page.posts变量
+  <div style="border:solid 2px;">
+    {% for key ,value in page %}
+     {% for key , value in page.posts %}
+      {{ key }}*******{{ value }}<hr>
+     {% endfor %}
+     {% endfor %}
+  </div>
+// page.posts本身好像不是一个数组??
+   <div style="border:solid 2px;">
+    {% set foo = page.posts.toArray() %}
+      {% for key , value in foo[0] %}
+          {{ key }}*******{{ value }}<hr>
+    {%- endfor %}
+  </div>
+```
+### 根目录下的db.json文件
+在这个json文件中存放了整个hexo中的数据模型和数据，这是其中的post模型，可以参考 warehose这个包，这个数据库类似 mongodb
+https://hexojs.github.io/warehouse/
+```json
+    "Post": [
+            {
+                "title": "常用Windows命令行工具",
+                "date": "2020-04-30T09:10:06.000Z",
+                "_content": "## tree(生成目录结构树)\n在所在目录执行 `tree /f > list.txt`,就会在当前文件夹list.txt中生成当前目录结构树(所有文件都会列出)\n可以不加 /f 只列出文件夹目录，不包含文件。\n\n",
+                "source": "_posts/常用Windows命令行工具.md",
+                "raw": "---\ntitle: 常用Windows命令行工具\ndate: 2020-04-30 17:10:06\ntags:\n---\n## tree(生成目录结构树)\n在所在目录执行 `tree /f > list.txt`,就会在当前文件夹list.txt中生成当前目录结构树(所有文件都会列出)\n可以不加 /f 只列出文件夹目录，不包含文件。\n\n",
+                "slug": "常用Windows命令行工具",
+                "published": 1,
+                "updated": "2020-04-30T09:29:38.928Z",
+                "comments": 1,
+                "layout": "post",
+                "photos": [],
+                "link": "",
+                "_id": "ck9o4hfz000005wtu6oe90npt",
+                "content": "<h2 id=\"tree-生成目录结构树\"><a href=\"#tree-生成目录结构树\" class=\"headerlink\" title=\"tree(生成目录结构树)\"></a>tree(生成目录结构树)</h2><p>在所在目录执行 <code>tree /f &gt; list.txt</code>,就会在当前文件夹list.txt中生成当前目录结构树(所有文件都会列出)<br>可以不加 /f 只列出文件夹目录，不包含文件。</p>\n",
+                "site": {
+                    "data": {}
+                },
+                "excerpt": "",
+                "more": "<h2 id=\"tree-生成目录结构树\"><a href=\"#tree-生成目录结构树\" class=\"headerlink\" title=\"tree(生成目录结构树)\"></a>tree(生成目录结构树)</h2><p>在所在目录执行 <code>tree /f &gt; list.txt</code>,就会在当前文件夹list.txt中生成当前目录结构树(所有文件都会列出)<br>可以不加 /f 只列出文件夹目录，不包含文件。</p>\n"
+            }
+        ]
+```
 ### next 主题 scripts 脚本目录
 
                             events
@@ -139,7 +191,7 @@ Template render error: (unknown path)
   Error: filter not found: date
     at Object._prettifyError (D:\projects\node\zonglinlee\node_modules\nunjucks\src\lib.js:36:11)
 原因：md文件语法和模板引擎语法冲突
-解决方法：用{% raw %} {% endraw %} 包裹
+解决方法：用{% raw %} {% endraw %} 包裹之后，可以渲染，但是不能解析成html ，尚未解决。
 
 ## 参考链接:
 - [next-injects](https://theme-next.org/docs/advanced-settings)
