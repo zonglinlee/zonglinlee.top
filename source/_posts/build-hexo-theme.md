@@ -1,7 +1,8 @@
 ---
 title: build-hexo-theme
 date: 2020-02-01 13:23:35
-tags:
+tags: 
+- hexo
 ---
 
 ## iconfont应用

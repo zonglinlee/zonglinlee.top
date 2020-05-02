@@ -1,10 +1,10 @@
 ---
 date: 2020/2/13 20:46:25
-categories:
-  - hexo
-tags:
-  - hexo
-  - next
+categories: 
+- hexo
+tags: 
+- hexo
+- next
 ---
 
 ## Hexo 配置
@@ -142,6 +142,16 @@ hexo.extend.helper.register('next_inject', function(point) {
           </div>
           {{page.content}}
 ```
+## next中的CSS
+在`/source/css/main.styl`中,使用了一个预定义函数`hexo-config`
+```js
+//它来自插件hexo-renderer-stylus
+//参考：https://github.com/hexojs/hexo-renderer-stylus/blob/master/lib/renderer.js
+ $scheme    = hexo-config('scheme') ? hexo-config('scheme') : 'Muse';
+ ```
+dark mode
+ The `prefers-color-scheme` CSS media feature is used to detect if the user has requested the system use a `light` or `dark` color theme.
+
 ## 点击文字特效
 ```js
 //需要引入jQuery
