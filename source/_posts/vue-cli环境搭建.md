@@ -1,3 +1,10 @@
+---
+title: vue-cli的使用
+tags:
+- vue
+---
+vue-cli脚手架的配置和使用
+<!-- more -->
 ## vue-cli插件
 - @vue/cli-plugin-eslint
 vue-cli 的 eslint 插件，通过这个插件给vue-cli注入了`vue-cli-service lint` 命令，提供了命令行使用lint的功能。@vue/cli-plugin-xxx功能都是注入命令行方法，扩展vue-cli 或者 webpack

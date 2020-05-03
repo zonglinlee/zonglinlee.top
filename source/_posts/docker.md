@@ -1,3 +1,11 @@
+---
+title: docker入门
+date: 2020-03-02 13:23:35
+tags: 
+- docker
+---
+docker
+<!-- more -->
 docker架构
 Linux 容器（Linux Containers，缩写为 LXC）。
 docker 是基于 Linux容器的一种封装

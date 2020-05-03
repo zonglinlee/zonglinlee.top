@@ -1,3 +1,8 @@
+---
+title: jquery
+tags:
+- jquery
+---
 - jQuery对象类似数组，它的每个元素都是一个引用了DOM节点的对象。
 - jQuery的选择器不会返回undefined或者null
 - jQuery对象和DOM对象之间可以互相转化

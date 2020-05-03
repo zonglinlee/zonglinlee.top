@@ -10,7 +10,6 @@ tags:
 ## Hexo 配置
 
 ## 如何在页面中关闭评论
-<!-- more -->
 在 front-matter 中配置 `comments: false`
 
 ## [如何引入图片](https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/)

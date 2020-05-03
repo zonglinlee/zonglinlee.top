@@ -6,3 +6,64 @@
 .logo-line-before, .logo-line-after{
     display: none;
 }
+div.posthr{
+    height: 1px;
+    background: rgba(44,44,44,.3);
+    width: 99%;
+    margin: 0 auto;
+}
+.posts-expand .post-block:not(:first-child){
+    margin-top: 60px;    
+}
+.mytag{
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #d0d0d0;
+    color: #B8B8B8;
+    overflow: hidden;
+    display: inline-block;
+    line-height: 35px;
+    margin: 8px;
+    padding: 0 15px;
+    font-size: 15px;
+    position: relative;
+    opacity: .999;
+    border-radius: 3px;
+    transition: all 0.3s;
+    cursor: pointer;
+    a{
+        border: none;
+        // span{
+        //     display: inline-block;
+        //     background: #aaa;
+        //     border-radius: 50%;
+        //     margin-left: 3px;
+
+        // }
+    }
+    a:before,a:after{
+        transition: all 0.3s;
+        content: '';
+        width: 100%;
+        height: 0;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        background-color: #2ecc71;
+    }
+
+        
+    a:before{
+        top:50%;
+    }
+    a:after{
+        bottom:50%;
+    }
+    a:hover:before{
+        height: 100%;
+    }
+    a:hover:after{
+        height: 100%;
+    }
+}

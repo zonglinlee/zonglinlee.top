@@ -1,3 +1,11 @@
+---
+title: expres
+date: 2020-03-02 13:23:35
+tags: 
+- express
+---
+express app.get()方法封装
+<!-- more -->
 # express
 ## express app.get()方法封装
 ```javascript

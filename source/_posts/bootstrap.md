@@ -4,7 +4,8 @@ date: 2020-03-02 14:23:39
 tags: 
 - CSS
 ---
-# bootstrap v4.4 入门
+bootstrap v4.4 
+<!-- more -->
 ## 使用bootstrap
 ### [在head中引入css](https://getbootstrap.com/docs/4.4/getting-started/introduction/#css)
 ### [引入js](https://getbootstrap.com/docs/4.4/getting-started/introduction/#js)

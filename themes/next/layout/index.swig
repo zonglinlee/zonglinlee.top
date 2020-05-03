@@ -8,7 +8,7 @@
 {% block content %}
 
   {%- for post in page.posts.toArray() %}
-    {{ partial('_macro/post.swig', {post: post, is_index: true}) }}
+    {{ partial('_macro/myindex.swig', {post: post, is_index: true}) }}
   {%- endfor %}
 
   {% include '_partials/pagination.swig' %}

@@ -8,7 +8,6 @@ tags:
 ### locals.js
 存储网站变量
 ## hexo extend
-<!-- more -->
 ### js 补漏
 
 #### Reflect.apply()

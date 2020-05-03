@@ -1,8 +1,9 @@
 ---
+title: centOS8 下安装 node
 comments: true
 tags: 
-- 部署
-- CentOS
+- Linux
+
 categories:
 - [CentOS8,Install]
 ---

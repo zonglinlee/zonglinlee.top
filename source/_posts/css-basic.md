@@ -4,6 +4,8 @@ date: 2020-03-01 13:23:35
 tags: 
 - CSS
 ---
+css 重要概念
+<!-- more -->
 ## formatting contexts types
 Everything on a page is part of a formatting context, or an area which has been defined to lay out content in a particular way. A block formatting context (BFC) will lay child elements out according to block layout rules, a flex formatting context will lay its children out as flex items, etc. Each formatting context has specific rules about how layout behaves when in that context.
 - block formatting contexts

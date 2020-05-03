@@ -5,6 +5,7 @@ tags:
 - CSS
 ---
 stylus基本概念
+<!-- more -->
 - 运算符 operator
 优先级从上到下依次降低
 ```js

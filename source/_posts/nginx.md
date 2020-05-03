@@ -1,4 +1,9 @@
-### windows nginx指南
+---
+title: nginx
+tags:
+- nginx
+---
+## windows nginx指南
 http://nginx.org/en/docs/windows.html
 新手指引
 http://nginx.org/en/docs/beginners_guide.html
@@ -18,7 +23,7 @@ nginx.exe -s reload  //重新加载配置文件
 nginx.exe -V   //查看各个目录
 nginx.exe -t   //检查配置文件是否正确 
 
-### Linux下安装nginx
+## Linux下安装nginx
 
 yum install nginx -y
 

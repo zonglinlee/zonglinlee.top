@@ -34,6 +34,7 @@
               {{ _p('counter.tag_cloud', site.tags.length) }}
             </div>
             <div class="tag-cloud-tags">
+            {#
               {{ tagcloud({
                 min_font   : theme.tagcloud.min,
                 max_font   : theme.tagcloud.max,
@@ -41,7 +42,9 @@
                 color      : true,
                 start_color: theme.tagcloud.start,
                 end_color  : theme.tagcloud.end})
-              }}
+              }}>
+              #}
+              {{ my_tagcloud() }}
             </div>
           </div>
         {% elif page.type === 'categories' %}
@@ -58,10 +61,11 @@
           </div>
           {% include '_scripts/pages/schedule.swig' %}
         {% elif page.type === 'about' %}
-        <img src="/images/avatar.jpg" class="author-image">
+          <img src="/images/avatar.jpg" class="author-image">
           <div class="author-description">
             {{ page.motto }}
           </div>
+
           {# 
           page.content：The full processed content of the article 
           #}

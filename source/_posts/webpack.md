@@ -1,3 +1,10 @@
+---
+title: webpack+express搭建脚手架
+tags:
+- webpack
+---
+`webpack-dev-middleware` + `webpack-hot-middleware`
+<!-- more -->
 [webpack-dev-middleware](https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server)
 webpack-dev-middleware 是一个容器(wrapper)，它可以把 webpack 处理后的文件传递给一个服务器(server)。webpack-dev-server内部就使用了它，如果不想使用webpack-dev-server,比如自行构建express服务器，就需要引入这个中间件。当express服务器脚本构建好之后，直接运行此服务器脚本，webpack就会自行打包，并将打包后的结果保存在内存中，此时即可在服务器中访问页面。
 优点：

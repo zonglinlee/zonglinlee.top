@@ -1,3 +1,9 @@
+---
+title: mysql
+tags:
+- sql
+- mysql
+---
 ## mysql安装
 https://blog.csdn.net/Very666/article/details/98594227
 ## 连接mysql

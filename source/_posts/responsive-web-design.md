@@ -2,7 +2,10 @@
 title: responsive web design
 date: 2020-01-31 09:31:49
 tags:
+- css
 ---
+css
+<!-- more -->
 - 容器块级元素自适应
 ```css
 .container{

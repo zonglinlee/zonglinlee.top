@@ -202,13 +202,13 @@
           {%- endif %}
           <!--/noindex-->
         {% else %}
-          {{ post.content }}
+          {{ toc(post.content,{list_number:false,max_depth:2}) }}
         {%- endif %}
       {% else %}
         {{ post.content }}
       {%- endif %}
     </div>
-<div class='posthr'></div>
+    <div class='posthr'></div>
     {#####################}
     {### END POST BODY ###}
     {#####################}
