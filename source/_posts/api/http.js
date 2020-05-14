@@ -3,7 +3,9 @@
 
 import axios from "axios";
 import router from "../router";
+//这里引入了 vant 的toast组件，可以自己封装。
 import { Toast } from "vant";
+
 const url = "http://localhost:3000";
 
 // 创建axios实例，这里的配置会覆盖axios库中默认的配置
