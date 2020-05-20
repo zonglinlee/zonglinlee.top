@@ -9,13 +9,13 @@ tags:
 <!-- more -->
 ## ajax上传文件
 ### 创建文件预览链接的两种方式
- `FileReader` 和 `URL` 构造函数。
+ `FileReader`  `URL`  构造函数以及`HTMLCanvasElement`对象。
  - `URL.createObjectURL(obj)`
  obj：A File, Blob, or MediaSource object to create an object URL for.
  The URL lifetime is tied to the document in the window on which it was created.
  - `FileReader.readAsDataURL(blob/file)`
 The `readAsDataURL` method is used to read the contents of the specified `Blob` or `File`. When the read operation is finished, the `readyState` becomes `DONE`, and the `loadend` is triggered. At that time, the `result` attribute contains the data as a data: URL representing the file's data as a base64 encoded string.
-
+- `HTMLCanvasElement.toDataURL(type, encoderOptions)`
  ```js
 //方法一 返回一个链接
 const objectURL = URL.createObjectURL(object)
@@ -25,6 +25,11 @@ const img = document.createElement("img");
     const reader = new FileReader();
     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
     reader.readAsDataURL(file);
+//方法三 
+var canvas = document.getElementById('canvas');
+var dataURL = canvas.toDataURL();
+// "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNby
+// blAAAADElEQVQImWNgoBMAAABpAAFEI8ARAAAAAElFTkSuQmCC"
  ```
 ## 后台处理(express为例)
 express 中间件 `body-parser` 只能处理以下几种:
