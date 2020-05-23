@@ -23,8 +23,8 @@ options.threshold 配置压缩阈值，Default `1024` bytes or `1kb`.
 >动态渲染的文件可以在koa服务器中使用koa-compress中间件压缩并返回，也可以在nginx中开启gizp压缩，对于客户端来说都是一样的，都是属于服务端压缩的
 ### 参考链接
 - [探索HTTP传输中gzip压缩的秘密](https://juejin.im/entry/5a577f64518825733a30a050)
-## [koa-static](https://github.com/koajs/static)
-如果静态资源中有 gzip 格式存在，以express服务器为例，需要配置如下中间件函数，返回正确的资源类型。在koa中也是一样，如果使用koa-static就可以自己检测，当然koa-static还有很多其它功能
+## [koa-static-cache](https://github.com/koajs/static)
+如果静态资源中有 gzip 格式存在，以express服务器为例，需要配置如下中间件函数，返回正确的资源类型。在koa中也是一样，如果使用koa-static-cache就可以自己检测，当然koa-static-cache还有很多其它功能
 ```js
 app.get(['/index.js','/index.css'], function (req, res, next) {
   req.url = req.url + '.gz'
@@ -33,6 +33,31 @@ app.get(['/index.js','/index.css'], function (req, res, next) {
   next()
 })
 ```
+### 参考链接
+[彻底搞懂浏览器缓存机制](https://juejin.im/post/5c4528a6f265da611a4822cc)
+## [koa-cors](https://github.com/evert0n/koa-cors)
+For security reasons, browsers restrict cross-origin HTTP requests initiated from scripts.  XMLHttpRequest and the Fetch API follow the `same-origin policy`. This means that a web application using those APIs can only request resources from the same origin the application was loaded from unless the response from other origins includes the right CORS headers.
 
+The HTTP response headers
+
+>Access-Control-Allow-Origin: <origin> | *
+>Access-Control-Expose-Headers: <header-name>[, <header-name>]*
+>Access-Control-Max-Age: <delta-seconds>
+>Access-Control-Allow-Credentials: true
+>Access-Control-Allow-Methods: <method>[, <method>]*
+>Access-Control-Allow-Headers: <header-name>[, <header-name>]*
+
+The HTTP request headers
+>Origin: <origin>
+>Access-Control-Request-Method: <method>
+>Access-Control-Request-Headers: <field-name>[, <field-name>]*
+
+### 参考链接
+- [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+## [koa-logger](https://github.com/koajs/logger)
+Development style logger middleware for koa. supports koa@2
+## [koa-body](https://github.com/dlau/koa-body)
+## [mysql](https://github.com/mysqljs/mysql)
 ## 参考链接
 - [十个常用中间件](https://www.jianshu.com/p/c1e0ca3f9764)
+- [MiddleWare-Lists](https://www.bookstack.cn/read/koa-docs-Zh-CN-v2.7.0/middleware.md)
