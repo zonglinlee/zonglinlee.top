@@ -7,6 +7,26 @@ tags:
 ---
 koa常见中间件
 <!-- more -->
+基本上，Koa 所有的功能都是通过中间件实现的，每个中间件默认接受两个参数，第一个参数是 Context 对象，第二个参数是next函数。只要调用next函数，就可以把执行权转交给下一个中间件。
+如果有异步操作（比如读取数据库），中间件就必须写成 async 函数。
+
+## [koa-session-minimal](https://github.com/longztian/koa-session-minimal)
+session机制：session是一种特殊的cookie，服务端返回一个通过response header 中的`Set-Cookie: sessionId=sessionIdValue` 来设置一个cookie，之后浏览器就带上这个cookie发送给服务器，服务器再通过这个id来在数据库中查询相关信息。
+在koa中通过`ctx.cookies.set(name, value, [options])`函数来写 Cookie，在`koa-session-minimal`中
+```js
+const session = require('koa-session-minimal');
+const MysqlStore = require('koa-mysql-session');
+app.use(
+  session({
+    key: 'USER_SID', // 响应头set-cookie中的key
+    store: new MysqlStore(sessionMysqlConfig), //创建一个 mysql 表来保存 sessionID
+    cookie:{
+      httpOnly:true,// cookie选项配置详情参考https://github.com/pillarjs/cookies
+    }
+  }),
+);
+```
+原理：每次koa服务器接收到新的请求时，都会app.use()一次这个中间件，内部会调用`ctx.cookies.get(key)`来得到session-id，如果不存在，就会创建一个session-id,并初始化一个`ctx.session`对象挂载到koa的context上，如果存在，就会根据此ID在数据库中查找到数据挂载到ctx.session上。 然后执行 `next()`方法，即调用下一个中间件函数继续执行后续处理，等后续中间件执行完毕之后(在这期间用户会对ctx.session进行操作，或者调用`ctx.sessionHandler`重置session id)，再继续执行此中间件的后续部分，判断session id 是否重置，以及ctx.session是否有改动等等，然后写入数据库存储
 ## [koa-compress](https://github.com/koajs/compress)
 koa-compress中间件会针对返回的文件类型和大小决定是否开启压缩，以及采用哪种压缩算法
 配置中 `options.filter` 函数会根据 `response content type` 决定对那种文件类型进行压缩,你可以手动配置，返回 true/false 开启关闭压缩，如下
@@ -57,7 +77,10 @@ The HTTP request headers
 ## [koa-logger](https://github.com/koajs/logger)
 Development style logger middleware for koa. supports koa@2
 ## [koa-body](https://github.com/dlau/koa-body)
+## [koa-router](https://github.com/ZijianHe/koa-router)
+boom库 ： 封装了http-statusCode的一个error库
 ## [mysql](https://github.com/mysqljs/mysql)
 ## 参考链接
+- [Koa 框架教程](http://www.ruanyifeng.com/blog/2017/08/koa.html)
 - [十个常用中间件](https://www.jianshu.com/p/c1e0ca3f9764)
 - [MiddleWare-Lists](https://www.bookstack.cn/read/koa-docs-Zh-CN-v2.7.0/middleware.md)
