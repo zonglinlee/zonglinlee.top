@@ -1,5 +1,5 @@
 ---
-title: linux命令
+title: linux-1
 date: 2020-01-02 13:23:35
 tags: 
 - linux

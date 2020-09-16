@@ -1,5 +1,5 @@
 ---
-title: mysql
+title: mysql-1
 tags:
 - sql
 - mysql
