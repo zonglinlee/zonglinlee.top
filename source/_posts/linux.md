@@ -1,5 +1,5 @@
 ---
-title: Linux-2
+title: linux-2
 tags: 
 - linux
 ---
@@ -16,3 +16,6 @@ mv nodejs-directory /usr/local/src
 sudo ln -s /usr/local/src/nodejs-direcory/bin/node /usr/local/bin/
 node --version
 ```
+
+安装JDK11(压缩包安装方式)
+参考链接 ：https://zhuanlan.zhihu.com/p/27892768

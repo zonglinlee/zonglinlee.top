@@ -2,6 +2,7 @@
 comments: true
 tags: 
 - ss
+- linux
 categories:
 - [CentOS8,Install]
 date: 2013-07-14 17:01:34
