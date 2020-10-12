@@ -16,8 +16,6 @@ ObjectID 对象主键
 也可以在mongo shell 中执行 `objectId()`生成对象主键，它包含了document创建的时间，可以通过
 `objectId(6hfe73j3w93oje934js3gt).getTimestamp()`来获取文档创建时间
 
-projection
-
 
 mongo shell crud操作
 - insert操作
@@ -106,3 +104,39 @@ while( myCursor.hasNext()){
 }
 注意游标操作的顺序，以下操作不会按照书写顺序执行，会先执行skip命令，skip命令优先于limit命令
 db.accounts.find().limit(5).skip(3)
+
+projection
+投影可以有选择性的返回文档中的部分字段
+{field:inclusion} 1表示返回该字段，0表示不返回字段
+db.accounts.find({},{name:1,_id:0})
+db.accounts.find({},{name:1,balance:0}) 这种写法是错误的
+在投影字段中，除了`_id:0` 可以混合使用之外，其它的字段是不可以混合使用的，意思是，要么全使用 1 列出所有要返回的字段，要么使用 0 列出所有不需要返回的字段即可。
+投影操作符(以下三个操作符都是针对投影中的数组字段进行操作的)
+`$slice` specifies the number of elements in an array to return in the query result.
+`$` The positional $ operator limits the contents of an <array> to return either:
+The first element that matches the query condition on the array.
+The first element if no query condition is specified for the array (Starting in MongoDB 4.4).
+`$elemMatch` The $elemMatch operator limits the contents of an <array> field from the query results to contain only the first element matching the $elemMatch condition.
+
+db.inventory.find( {}, { _id: 0, "details.colors": { $slice: 1 } } )
+Return an Array with 3 Elements After Skipping the First Element
+db.posts.find( {}, { comments: { $slice: [ 1, 3 ] } } )
+db.schools.find( { zipcode: "63109" },
+                 { students: { $elemMatch: { school: 102, age: { $gt: 10} } } } )
+- update操作
+`db.collection.update/db.collection.findAndModify/db.collection.save`
+db.collection.update(query, update, options)
+db.collection.update注意事项
+如果不提供options选项，则视为 更新整篇文档，MongoDB会使用update文档内容完全替换query筛选出的第一篇文档
+文档主键 _id是不可更改的，如果一定要在update中写入_id值，它必须和更新之前的值一样，否则会报 writeError 错误，因为_id是immutable的
+在更新文档时候，不管查询条件会筛选到几个文档，只有第一篇文档会被更新，更新整篇文档的操作只能用在单一文档上面
+
+更新特定字段(提供options选项,不提供update文档对象)
+更新操作符
+`$set`	Sets the value of a field in a document.
+{ $set: { <field1>: <value1>, ... } }
+`$rename`	Renames a field.
+`$unset`	Removes the specified field from a document.
+db.products.update({ _id: 200 },{ name: "lee" }) // 更新整篇文档(替换)
+db.products.update({ _id: 100 },{ $set: { "details.make": "zzz" } })
+db.accounts.update({name:"bob"},{$set:{contact.0: "12345678"}) //更新contact数组第一个元素
