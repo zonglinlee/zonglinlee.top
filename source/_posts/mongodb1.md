@@ -137,6 +137,39 @@ db.collection.update注意事项
 { $set: { <field1>: <value1>, ... } }
 `$rename`	Renames a field.
 `$unset`	Removes the specified field from a document.
+`$inc`  $inc operator increments a field by a specified value // 只能用于数字字段上
+`$mul` Multiply the value of a field by a number. // 只能用于数字字段上
+`$min` The $min updates the value of the field to a specified value if the specified value is less than the current value of the field.
+`$max` The $max operator updates the value of the field to a specified value if the specified value is greater than the current value of the field. 
 db.products.update({ _id: 200 },{ name: "lee" }) // 更新整篇文档(替换)
 db.products.update({ _id: 100 },{ $set: { "details.make": "zzz" } })
 db.accounts.update({name:"bob"},{$set:{contact.0: "12345678"}) //更新contact数组第一个元素
+数组更新操作符
+$	Acts as a placeholder to update the first element that matches the query condition.
+$[]	Acts as a placeholder to update all elements in an array for the documents that match the query condition.
+$[<identifier>]	Acts as a placeholder to update all elements that match the arrayFilters condition for the documents that match the query condition.
+$addToSet	Adds elements to an array only if they do not already exist in the set.
+$pop	Removes the first or last item of an array.
+$pull	Removes all array elements that match a specified query.
+$push	Adds an item to an array.
+$pullAll	Removes all matching values from an array.
+Update Operator Modifiers
+$each	Modifies the $push and $addToSet operators to append multiple items for array updates.
+$position	Modifies the $push operator to specify the position in the array to add elements.
+$slice	Modifies the $push operator to limit the size of updated arrays.
+$sort	Modifies the $push operator to reorder documents stored in an array.
+
+- 删除操作
+db.collection.remove(query,options)
+db.accounts.remove({balance:50}) // 删除所有余额等于50的文档
+db.accounts.remove({}) // 删除accounts集合中的所有文档,但是集合还在
+db.accounts.drop() // 删除整个集合
+日常操作中如果集合文档太多 ，通过db.accounts.remove({})进行删除效率不高，可以使用drop命令先删除整个集合，然后再创建这个集合
+
+- 聚合操作
+aggregation
+Any of a variety of operations that reduces and summarizes large sets of data. MongoDB’s aggregate() and mapReduce() methods are two examples of aggregation operations. 
+
+`db.collection.aggregate(pipeline, options)`
+pipeline	array	
+A sequence of data aggregation operations or stages
