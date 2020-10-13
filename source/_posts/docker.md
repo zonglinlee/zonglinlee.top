@@ -2,7 +2,7 @@
 title: docker入门
 date: 2020-03-02 13:23:35
 tags: 
-- docker
+ - docker
 ---
 docker
 <!-- more -->
@@ -11,8 +11,6 @@ Linux 容器（Linux Containers，缩写为 LXC）。
 docker 是基于 Linux容器的一种封装
 docker启动了之后，本地 docker host(运行一个docker 后台服务，里面有docker containers和docker images)
 docker container 是由 docker image 实例化产生的，比如有一个node镜像(image),可以从这个node镜像同时生成多个实例(container)
-
-端口映射：比如我们的vps主机上运行了一个nginx的docker container，我们`curl http://localhost`是访问的此vps上的80端口，但是vps本身没有启动nginx服务，我们需要将请求映射到docker container中，即当有请求访问80端口的时候，我们转交给docker 中的nginx服务来处理
 
 ## [docker常用命令](https://www.runoob.com/docker/docker-command-manual.html)
 
@@ -55,18 +53,46 @@ docker exec -it containerID  /bin/bash (进入docker容器)
 
 --volume , -v: 绑定一个卷
 
+### [docker build [OPTIONS] PATH | URL | -](https://www.runoob.com/docker/docker-build-command.html)
+
+--tag, -t: 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。
+
+使用`当前目录`的 Dockerfile 创建镜像，标签为 runoob/ubuntu:v1。
+`docker build -t runoob/ubuntu:v1 .`
+使用URL github.com/creack/docker-firefox 的 Dockerfile 创建镜像。
+`docker build github.com/creack/docker-firefox`
+
+### [docker push [OPTIONS] NAME[:TAG]](https://www.runoob.com/docker/docker-push-command.html)
+
+docker push : 将本地的镜像上传到镜像仓库,要先登陆到镜像仓库
+`docker push myapache:v1`
+
 ## [制作docker image](https://cloud.tencent.com/developer/article/1667562)
 
 docker image是一层层加上去的，你可以基于别人的镜像叠加创建你自己的image
 docker inspect node (查看镜像)
 
 Dockerfile 文件(文件名就叫做Dockerfile,docker 打包的时候就会找这个文件，根据里面的配置来打包)
+Dockerfile是由一系列命令和参数组成的一个文件。其中，每条件命令都要大写（如：FROM），且其后都要跟一个参数（如：centos）。构建镜像时，Dockerfile中的命令会按顺序从上到下执行，在编写Dockerfile文件时应注意各条命令的顺序安排。Dockerfile文件中的每条命令，都会创建一个新的镜像层并会提交镜像。
+
 比如我们在vps 上创建了一个app文件夹
+
+```shell
 |___app(文件夹)
 |       |_ _server.js(一个express服务器)
 |       |_ _package.json
 |___Dockerfile
+```
 
+Dockerfile文件创建完成后，就可以通过 `docker build` 命令来构建新镜像。执行docker build命令时，Dockerfile中的命令都会被执行和提交，且每次提交都会创建一个新镜像。
+新镜像构建完成后，可以将其推送到Docker Hub，这样就可以在需要的时候轻松获取和使用镜像
+
+```shell
+docker login
+docker push web_test
+```
+
+Dockerfile常用命令
 ![dockerfile](/images/dockerfile.png)
 
 ```shell
@@ -172,6 +198,32 @@ curl  http://locolhost:80  #会返回 `welcome to express` html
 ## [docker 容器连接](https://cloud.tencent.com/developer/article/1667560)
 
 在使用Docker容器时，我们需要访问容器的内部网络，或需要在容器间相互访问。Docker 容器默认不会开放任何端口，因此需要将容器与宿主机进行端口映射，使容器可外部访问。而容器间互相访问，除了可以基于端口映射进行访问外，还可以通过容器链接（Link）的方式，也可以通过Docker 网络（Networking）实现
+
+### 一. 端口映射与外部访问容器
+
+比如我们的vps主机上运行了一个nginx的docker container，我们`curl http://localhost`是访问的此vps上的80端口，但是vps本身没有启动nginx服务，我们需要将请求映射到docker container中，即当有请求访问80端口的时候，我们转交给docker 中的nginx服务来处理
+容器与宿主机间建立端口映射关系时，可以在运行容器时使用-P或-p参数指定端口映射
+
+### 容器链接（Link）
+
+在执行`docker run`命令时候可以使用--link参数可以让容器间安全的进行互联
+`docker run -d --name db -e POSTGRES_PASSWORD=123456  postgres:9.4`
+`docker run -d -P --name web --link db:db training/webapp python app.py`
+--link表示建立容器互联，参数为name:alias，name是要链接的容器名称，alias是我们取得别名
+通过--link，Docker 会在两个互联的容器之间创建了一个安全的隧道，且不用映射它们的端口到宿主主机上。在前面我们启动db容器的时，并没有使用-p和-P参数，从而避免了暴露数据库端口到外部网络上，增加了容器的安全性。
+
+### Docker网络（Networking）
+
+Docker Networking允许用户创建自己的网络，容器间可以通过这个网络互相通讯。Docker Networking允许容器跨越不同的宿主机通讯，且网络配置方式更灵活。
+Docker Engine 会在引擎安装时自动创建一个名为bridge（桥接）网络，这个网络会与docker0(Docker内部网络)相对应。
+除此之外，用户还可以自行创建bridge或overlay类型的网络。bridge网络适用于单台宿主机运行的单Docker引擎环境，而overlay网络允许我们跨多台宿主机进行通讯。
+创建一个网络: `docker network create -d bridge test-net`
+-d 参数指定 Docker 网络类型，有 bridge、overlay
+查看网络：`docker network ls`
+创建网络后，可以在创建容器时通过--network参数指定容器要使用的网络：
+`docker run -d --name db2 --network=test-net training/postgres`
+查看的网络情况: `docker network inspect test-net`
+另外还可以进入容器内部通过 `ping containerName` 的方式查看两个容器是否连通
 
 ## [Docker数据卷](https://cloud.tencent.com/developer/article/1667563)
 
