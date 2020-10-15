@@ -127,9 +127,12 @@ db.schools.find( { zipcode: "63109" },
 `db.collection.update/db.collection.findAndModify/db.collection.save`
 db.collection.update(query, update, options)
 db.collection.update注意事项
+By default, the db.collection.update() method updates a single document. Include the option multi: true to update all documents that match the query criteria.
 如果不提供options选项，则视为 更新整篇文档，MongoDB会使用update文档内容完全替换query筛选出的第一篇文档
 文档主键 _id是不可更改的，如果一定要在update中写入_id值，它必须和更新之前的值一样，否则会报 writeError 错误，因为_id是immutable的
 在更新文档时候，不管查询条件会筛选到几个文档，只有第一篇文档会被更新，更新整篇文档的操作只能用在单一文档上面
+
+`db.districts.update({},{$set:{domainName:"义务教育动态检测平台"}},{multi:true})`
 
 更新特定字段(提供options选项,不提供update文档对象)
 更新操作符
