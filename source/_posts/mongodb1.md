@@ -320,3 +320,37 @@ Stages are descriptive of the operation;
 ## 数据库分片(扩展性)
 分片集群中的每个数据库中存储一部分数据，整个集群的数据合并起来才是一个完整的数据库
 mongos: 它提供路由功能，它向配置服务器请求分片数据库中的元数据，当客户端发送读取文档请求时候，mongos会导向最终的读库数据库。
+## mongodb 数据库认证与授权
+- 创建用户
+注意：执行db.createUser这个命令必须是有管理用户权限角色的用户才可以执行
+```shell
+use admin
+db.createUser({user,pwd,roles})
+```
+- 启用身份认证，重启mongod进程
+验证方法一：使用用户名/密码进行身份验证
+`mongo -u "myUserAdmin" -p 'password' --authenticationDatabase "admin"`
+在哪一个数据库创建的用户，那么这个数据库就成为该用户的验证数据库,进行连接的时候指定验证数据库`authenticationDatabase`选项
+一个用户只能有一个验证数据库,但这并不影响该用户操作其它数据库的权限，权限是分开的
+验证方法二： `db.auth(username,password)`进行身份验证
+- 授权
+权限 = 在哪里？ + 可以做什么？
+{resource: {db: 'test',collection: ''}, actions:['find', 'update'}}\
+角色 = 权限的集合
+Built-In Roles
+read
+Provides the ability to read data on all non-system collections and the system.js collection.
+readWrite
+Provides all the privileges of the read role plus ability to modify data on all non-system collections and the system.js collection.
+userAdminAnyDatabase
+Provides the same access to user administration operations as userAdmin on  all databases except local and config.
+
+- 自定义角色
+`db.createRole(role, writeConcern)`
+`db.getRoles()`
+Returns information for all the roles in the database on which the command runs. 
+
+## mongodb 数据库管理工具
+mongoexport - 将数据导出为json或者csv格式
+mongoimport - 将json或者csv文件导入数据库
+mongostat  - 显示数据库服务服务器进程状态
